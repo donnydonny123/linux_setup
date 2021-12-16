@@ -10,8 +10,7 @@ git clone https://github.com/donnydonny123/linux_setup $HOME/linux_setup
 
 # bashrc
 echo "Copying bashrc"
-rm $HOME/.bashrc
-cp $CFG/.bashrc $HOME/.bashrc
+cp -f $CFG/.bashrc $HOME/.bashrc
 source $HOME/.bashrc
 
 # zsh & oh-my-zsh
@@ -23,25 +22,21 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 
 # zshrc
 echo "Copying zshrc"
-rm $HOME/.zshrc
-cp $CFG/.zshrc $HOME/.zshrc
+cp -f $CFG/.zshrc $HOME/.zshrc
 source $HOME/.zshrc
 
 # vim
 echo "Copying vimrc"
-rm $HOME/.vimrc
-cp $CFG/.vimrc $HOME/.vimrc
+cp -f $CFG/.vimrc $HOME/.vimrc
 source $HOME/.vimrc
 
 # gitconfig
 echo "Copying gitconfig"
-rm $HOME/.gitconfig
-cp $CFG/.gitconfig $HOME/.gitconfig
+cp -f $CFG/.gitconfig $HOME/.gitconfig
 
 # tmux
 echo "Copying tmux.conf"
-rm $HOME/.tmux.conf
-cp $CFG/.tmux.conf $HOME/.tmux.conf
+cp -f $CFG/.tmux.conf $HOME/.tmux.conf
 source $HOME/.tmux.conf
 
 ## install miniconda python
