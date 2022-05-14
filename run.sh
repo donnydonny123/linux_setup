@@ -3,7 +3,7 @@ CFG="$PWD/linux_setup/config"
 
 # apt-get
 sudo apt-get update
-sudo apt-get install -y git zsh vim tmux wget curl git htop nvtop cmake
+sudo apt-get install -y zsh vim tmux wget curl git htop nvtop cmake fzf
 
 # download directory
 git clone https://github.com/donnydonny123/linux_setup $HOME/linux_setup
