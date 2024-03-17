@@ -39,7 +39,8 @@ cp -f $CFG/.gitconfig $HOME/.gitconfig
 
 # tmux
 echo "Copying tmux.conf"
-cp -f $CFG/.tmux.conf $HOME/.tmux.conf
+# change to ln
+ln -s $CFG/.tmux.conf $HOME/.tmux.conf
 tmux source-file $HOME/.tmux.conf
 
 ## install miniconda python
