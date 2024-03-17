@@ -22,6 +22,9 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 
 # zshrc
 echo "Copying zshrc"
+if [ -f "$HOME/.zshrc" ]; then
+    mv $HOME/.zshrc $HOME/.zshrc.bak
+fi
 cp -f $CFG/.zshrc $HOME/.zshrc
 sed -i "s|{pwd}|$HOME|g" $HOME/.zshrc
 source $HOME/.zshrc
