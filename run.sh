@@ -1,12 +1,13 @@
 #!/bin/bash
-CFG="$PWD/linux_setup/config"
-
+CFG="$HOME/linux_setup/config"
 # apt-get
 sudo apt-get update
 sudo apt-get install -y zsh vim tmux wget curl git htop nvtop cmake fzf
 
 # download directory
-git clone https://github.com/donnydonny123/linux_setup $HOME/linux_setup
+if [ ! -d "$HOME/linux_setup" ]; then
+    git clone https://github.com/donnydonny123/linux_setup $HOME/linux_setup
+fi
 
 # bashrc
 echo "Copying bashrc"
@@ -15,7 +16,6 @@ source $HOME/.bashrc
 
 # zsh & oh-my-zsh
 sudo chsh -s /bin/zsh $USER
-# git clone https://github.com/robbyrussell/oh-my-zsh.git
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 ## extension
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
@@ -23,12 +23,12 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 # zshrc
 echo "Copying zshrc"
 cp -f $CFG/.zshrc $HOME/.zshrc
+sed -i "s|{pwd}|$HOME|g" $HOME/.zshrc
 source $HOME/.zshrc
 
 # vim
 echo "Copying vimrc"
 cp -f $CFG/.vimrc $HOME/.vimrc
-source $HOME/.vimrc
 
 # gitconfig
 echo "Copying gitconfig"
@@ -37,7 +37,7 @@ cp -f $CFG/.gitconfig $HOME/.gitconfig
 # tmux
 echo "Copying tmux.conf"
 cp -f $CFG/.tmux.conf $HOME/.tmux.conf
-source $HOME/.tmux.conf
+tmux source-file $HOME/.tmux.conf
 
 ## install miniconda python
 while true; do
@@ -45,8 +45,7 @@ while true; do
     case $yn in
         [Yy])
             # install Anaconda3
-            fileName=`curl -sS https://docs.conda.io/en/latest/miniconda.html | grep -Po 'Miniconda3-latest-Linux(.*?)x86_64\.sh'`
-            curl -fsSL https://repo.anaconda.com/miniconda/$fileName > /tmp/miniconda.sh
+            wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/miniconda.sh
             bash /tmp/miniconda.sh
             rm /tmp/miniconda.sh
             break
