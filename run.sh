@@ -35,7 +35,9 @@ cp -f $CFG/.vimrc $HOME/.vimrc
 
 # gitconfig
 echo "Copying gitconfig"
-cp -f $CFG/.gitconfig $HOME/.gitconfig
+if [ ! -f "$HOME/.gitconfig" ]; then
+    cp -f $CFG/.gitconfig $HOME/.gitconfig
+fi
 
 # tmux
 echo "Copying tmux.conf"
