@@ -2,7 +2,7 @@
 CFG="$HOME/linux_setup/config"
 # apt-get
 sudo apt-get update
-sudo apt-get install -y zsh vim tmux wget curl git htop nvtop cmake fzf
+sudo apt-get install -y zsh vim tmux wget curl git htop cmake fzf
 
 # download directory
 if [ ! -d "$HOME/linux_setup" ]; then
