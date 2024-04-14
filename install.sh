@@ -18,7 +18,9 @@ source $HOME/.bashrc
 sudo chsh -s /bin/zsh $USER
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 ## extension
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+if [ ! -d "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ]; then
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+fi
 
 # zshrc
 echo "Copying zshrc"
@@ -31,7 +33,9 @@ source $HOME/.zshrc
 
 # vim
 echo "Copying vimrc"
-cp -f $CFG/.vimrc $HOME/.vimrc
+if [ ! -f "$HOME/.vimrc" ]; then
+    cp -f $CFG/.vimrc $HOME/.vimrc
+fi
 
 # gitconfig
 echo "Copying gitconfig"
@@ -42,11 +46,13 @@ fi
 # tmux
 echo "Copying tmux.conf"
 # change to ln
-ln -s $CFG/.tmux.conf $HOME/.tmux.conf
-tmux source-file $HOME/.tmux.conf
+if [ ! -f "$HOME/.tmux.conf" ]; then
+    ln -s $CFG/.tmux.conf $HOME/.tmux.conf
+    tmux source-file $HOME/.tmux.conf
+fi
 
-## install miniconda python
-while true; do
+## install miniconda python if running with an terminal
+while test -t 0 ; do
     read -p "Do you want to install Miniconda3? (Y/N) " yn
     case $yn in
         [Yy])
