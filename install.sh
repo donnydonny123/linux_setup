@@ -1,6 +1,7 @@
 #!/bin/bash
 CFG="$HOME/linux_setup/config"
 # apt-get
+apt-get install -y sudo
 sudo apt-get update
 sudo apt-get install -y zsh vim tmux wget curl git htop cmake fzf
 
@@ -16,7 +17,7 @@ source $HOME/.bashrc
 
 # zsh & oh-my-zsh
 sudo chsh -s /bin/zsh $USER
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" --keep-zshrc --unattended
 ## extension
 if [ ! -d "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ]; then
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
@@ -32,21 +33,20 @@ sed -i "s|{pwd}|$HOME|g" $HOME/.zshrc
 source $HOME/.zshrc
 
 # vim
-echo "Copying vimrc"
 if [ ! -f "$HOME/.vimrc" ]; then
+    echo "Copying vimrc"
     cp -f $CFG/.vimrc $HOME/.vimrc
 fi
 
 # gitconfig
-echo "Copying gitconfig"
 if [ ! -f "$HOME/.gitconfig" ]; then
+    echo "Copying gitconfig"
     cp -f $CFG/.gitconfig $HOME/.gitconfig
 fi
 
 # tmux
-echo "Copying tmux.conf"
-# change to ln
 if [ ! -f "$HOME/.tmux.conf" ]; then
+    echo "Copying tmux.conf"
     ln -s $CFG/.tmux.conf $HOME/.tmux.conf
     tmux source-file $HOME/.tmux.conf
 fi

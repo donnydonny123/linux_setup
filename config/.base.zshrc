@@ -23,9 +23,6 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-# Set up fzf key bindings and fuzzy completion
-eval "$(fzf --zsh)"
-
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin${PATH:+:${PATH}}
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/miniconda3/bin:$PATH
