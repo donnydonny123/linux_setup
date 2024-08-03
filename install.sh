@@ -52,9 +52,9 @@ if [ ! -f "$HOME/.tmux.conf" ]; then
 fi
 
 ## install miniconda python if running with an terminal
-while test -t 0 ; do
-    read -p "Do you want to install Miniconda3? (Y/N) " yn
-    case $yn in
+while test -t 0 && [ -z "${INSTALL_PYTHON}" ] ; do
+    read -p "Do you want to install Miniconda3? (Y/N) " INSTALL_PYTHON
+    case $INSTALL_PYTHON in
         [Yy])
             # install Anaconda3
             wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/miniconda.sh
